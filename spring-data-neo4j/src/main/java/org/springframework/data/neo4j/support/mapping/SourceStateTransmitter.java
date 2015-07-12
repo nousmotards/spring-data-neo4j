@@ -105,9 +105,9 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                     setEntityStateValue(property, entityState, wrapper, property.getMappingPolicy());
                 }
             });
-            if (target instanceof UpdateableState) {
-                ((UpdateableState)target).flush();
-            }
+            //if (target instanceof UpdateableState) {
+            //    ((UpdateableState)target).flush();
+            //}
             // todo take mapping policies for relationships into account
             persistentEntity.doWithAssociations(new AssociationHandler<Neo4jPersistentProperty>() {
                 @Override
