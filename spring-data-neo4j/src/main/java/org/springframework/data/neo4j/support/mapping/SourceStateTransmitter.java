@@ -108,7 +108,7 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
             });
             if (target instanceof RestEntity && target instanceof UpdateableState) {
                 final String[] splitUri = target.getUri().split("/");
-                if (splitUri[splitUri.length() - 1].toLowerCase().contentEquals("node")) {
+                if (splitUri[splitUri.length - 1].toLowerCase().contentEquals("node")) {
                     ((UpdateableState)target).flush();
                 }
             }
