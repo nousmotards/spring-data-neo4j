@@ -106,8 +106,11 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                     setEntityStateValue(property, entityState, wrapper, property.getMappingPolicy());
                 }
             });
-            if (wrapper.getBean() instanceof NodeEntity) {
-                ((UpdateableState)target).flush();
+            if (target instanceof RestEntity && target instanceof UpdateableState) {
+                final String[] splitUri = target.getUri().split("/");
+                if (splitUri[splitUri.length() - 1].toLowerCase().contentEquals("node")) {
+                    ((UpdateableState)target).flush();
+                }
             }
             // todo take mapping policies for relationships into account
             persistentEntity.doWithAssociations(new AssociationHandler<Neo4jPersistentProperty>() {
