@@ -16,7 +16,7 @@
 package org.springframework.data.neo4j.support.mapping;
 
 import org.neo4j.graphdb.*;
-import org.springframework.data.neo4j.support.node.NodeEntityState;
+//import org.springframework.data.neo4j.support.node.NodeEntityState;
 import org.springframework.data.mapping.Association;
 import org.springframework.data.mapping.AssociationHandler;
 import org.springframework.data.mapping.PersistentPropertyAccessor;
