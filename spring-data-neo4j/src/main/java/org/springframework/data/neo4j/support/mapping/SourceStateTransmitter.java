@@ -16,6 +16,7 @@
 package org.springframework.data.neo4j.support.mapping;
 
 import org.neo4j.graphdb.*;
+import org.neo4j.rest.graphdb.entity.RestEntity;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.mapping.Association;
 import org.springframework.data.mapping.AssociationHandler;
