@@ -106,7 +106,7 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                     setEntityStateValue(property, entityState, wrapper, property.getMappingPolicy());
                 }
             });
-            if (target instanceof UpdateableState && entityStateObject instanceof NodeEntityState) {
+            if (target instanceof UpdateableState) {
                 ((UpdateableState) target).flush();
             }
             // todo take mapping policies for relationships into account
