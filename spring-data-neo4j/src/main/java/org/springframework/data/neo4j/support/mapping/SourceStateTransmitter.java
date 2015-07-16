@@ -16,7 +16,7 @@
 package org.springframework.data.neo4j.support.mapping;
 
 import org.neo4j.graphdb.*;
-import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.support.node.NodeEntityState;
 import org.springframework.data.mapping.Association;
 import org.springframework.data.mapping.AssociationHandler;
 import org.springframework.data.mapping.PersistentPropertyAccessor;
@@ -98,7 +98,7 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                 ((UpdateableState)target).track();
             }
             entityState.setPersistentState(target);
-            entityState.persist();
+            final Object entityStateObject = entityState.persist();
             // todo take mapping policies for attributes into account
             persistentEntity.doWithProperties(new PropertyHandler<Neo4jPersistentProperty>() {
                 @Override
@@ -106,12 +106,8 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                     setEntityStateValue(property, entityState, wrapper, property.getMappingPolicy());
                 }
             });
-            final String[] splitTargetClassName = target.getClass().getName().split("\\.");
-            if (target instanceof UpdateableState && splitTargetClassName[splitTargetClassName.length - 1].contentEquals("restnode")) {
-                final String[] splitUri = target.getUri().split("/");
-                if (splitUri[splitUri.length - 2].toLowerCase().contentEquals("node")) {
-                    ((UpdateableState)target).flush();
-                }
+            if (target instanceof UpdateableState && entityStateObject instanceof NodeEntityState) {
+                ((UpdateableState) target).flush();
             }
             // todo take mapping policies for relationships into account
             persistentEntity.doWithAssociations(new AssociationHandler<Neo4jPersistentProperty>() {
