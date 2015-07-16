@@ -16,7 +16,7 @@
 package org.springframework.data.neo4j.support.mapping;
 
 import org.neo4j.graphdb.*;
-import org.springframework.data.neo4j.support.node.NodeEntityState;
+import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.mapping.Association;
 import org.springframework.data.mapping.AssociationHandler;
 import org.springframework.data.mapping.PersistentPropertyAccessor;
@@ -106,7 +106,7 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                     setEntityStateValue(property, entityState, wrapper, property.getMappingPolicy());
                 }
             });
-            if (target instanceof UpdateableState && entityStateObject instanceof NodeEntityState) {
+            if (target instanceof UpdateableState && entityStateObject instanceof NodeEntity) {
                 ((UpdateableState) target).flush();
             }
             // todo take mapping policies for relationships into account
