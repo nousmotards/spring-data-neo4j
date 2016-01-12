@@ -106,7 +106,10 @@ public class SourceStateTransmitter<S extends PropertyContainer> {
                 }
             });
             if (target instanceof UpdateableState) {
-                ((UpdateableState)target).flush();
+                final String[] sTarget = target.toString().split("/");
+                if (sTarget[sTarget.length - 2].toLowerCase().contentEquals("node")) {
+                    ((UpdateableState)target).flush();
+                }
             }
             // todo take mapping policies for relationships into account
             persistentEntity.doWithAssociations(new AssociationHandler<Neo4jPersistentProperty>() {
